@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="style/main.css">
-  <title>TODO</title>
-</head>
-<body>
-<h1>TODO</h1>
-<div class="wrapper">
-
-</div>
-<script src="main.js" type="module"></script>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <link href="style/main.css" rel="stylesheet">
+    <title>TODO</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="task__list _container">
+        <div class="title__container">
+          <h2 class="title__text">hight</h2>
+        </div>
+        <div class="task__input">
+          <input class="input__field" placeholder="Добавить важных дел" type="text">
+          <div class="input__button-add"></div>
+        </div>
+        <div class="task__item _done">
+          <div class="item__button-done"></div>
+          <div class="task__text">Сверстать этот TODO list</div>
+          <div class="item__button-cancel"></div>
+        </div>
+      </div>
+    </div>
+    <script src="main.js" type="module"></script>
+  </body>
 </html>
