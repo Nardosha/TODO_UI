@@ -346,79 +346,113 @@ body,
 html {
   font-size: 18px;
   color: #202020;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, sans-serif;
   font-weight: 400;
-  line-height: 120%;
+  line-height: 110%;
 }
 
 .wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
+  align-content: center;
+  min-height: 100vh;
 }
 
 ._container {
   min-width: 476px;
+  max-width: 476px;
   max-height: 688px;
   border: 1px solid #000;
-  padding: 10px;
+  padding: 10px 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px;
 }
 
-.task__list {
+.title__container {
+  margin: 0 0 12px 0;
+}
+.title__container .title__text {
+  font-family: inherit;
+  line-height: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.task .task__block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 0;
+}
+.task .task__block:last-child {
+  padding: 6px 0 15px 0;
+}
+.task .task__block:first-child {
+  padding: 15px 0 6px 0;
+}
+.task .task__input {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.task .task__input .input__field {
+  width: 100%;
+  min-height: 45px;
+  padding: 10px 35px 10px 10px;
+  border: 1px solid #BBBBBB;
+  border-radius: 6px;
+}
+.task .task__input .input__field::placeholder {
+  color: #BBBBBB;
+}
+.task .task__input .input__button-add {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  right: 2%;
+  cursor: pointer;
+}
+.task .task__input .input__button-add::before, .task .task__input .input__button-add::after {
+  content: "";
+  right: 10%;
+  top: 50%;
+  transform: translate(0, 50%);
+  width: 18px;
+  height: 1px;
+  position: absolute;
+  background: #BBB;
+}
+.task .task__input .input__button-add::after {
+  transform: rotate(90deg);
+}
+.task .task__input .input__button-add::before {
+  transform: rotate(180deg);
+}
+.task .task__input .input__button-add::before:hover,
+.task .task__input .input__button-add::after:hover {
+  background: red;
+  box-shadow: 0 2px 5px;
+}
+.task .task__list {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.task__list .task__input {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-}
-.task__list .task__input .input__button-add {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  right: 2%;
-  cursor: pointer;
-}
-.task__list .task__input .input__button-add::before, .task__list .task__input .input__button-add::after {
-  content: "";
-  right: 10%;
-  top: 50%;
-  transform: translate(0, 50%);
-  width: 20px;
-  height: 1px;
-  position: absolute;
-  background: #BBB;
-}
-.task__list .task__input .input__button-add::after {
-  transform: rotate(90deg);
-}
-.task__list .task__input .input__button-add::before {
-  transform: rotate(180deg);
-}
-.task__list .task__input .input__button-add::before:hover, .task__list .task__input .input__button-add::after:hover {
-  background: red;
-  box-shadow: 0 2px 5px;
-}
-.task__list .input__field {
-  width: 100%;
-  min-height: 45px;
-  padding: 10px;
-  border: 1px solid #BBBBBB;
-  border-radius: 6px;
-}
-.task__list .input__field::placeholder {
-  color: #BBBBBB;
-}
-.task__list .task__item {
+.task .task__list .task__item {
   width: 100%;
   margin: 5px 0 0 0;
-  padding: 10px 10px 10px 40px;
+  padding: 10px 10px 10px 10px;
   border: 1px solid #BBBBBB;
   border-radius: 6px;
   position: relative;
@@ -426,25 +460,31 @@ html {
   transition: background 0.3s ease-in-out;
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
 }
-.task__list .task__item .item__button-done {
-  width: 20px;
-  height: 20px;
+.task .task__list .task__item .item__button-done {
+  box-sizing: content-box;
+  order: -1;
+  min-width: 21px;
+  height: 21px;
   border: 1px solid #BBBBBB;
   border-radius: 50%;
   background: #fff;
-  top: 50%;
-  left: 2%;
-  transform: translate(0, -50%);
-  position: absolute;
   cursor: pointer;
   transition: background 0.3s ease-in-out;
+  margin: 3px 12px 0 0;
 }
-.task__list .task__item .item__button-cancel {
+.task .task__list .task__item .item__button-cancel {
+  box-sizing: content-box;
+  order: 1;
   position: relative;
+  cursor: pointer;
+  width: 12px;
+  height: 12px;
+  margin: 3px 0 0 18px;
 }
-.task__list .task__item .item__button-cancel::after,
-.task__list .task__item .item__button-cancel::before {
+.task .task__list .task__item .item__button-cancel::after,
+.task .task__list .task__item .item__button-cancel::before {
   content: "";
   right: 2%;
   top: 50%;
@@ -454,16 +494,16 @@ html {
   position: absolute;
   background: #BBB;
 }
-.task__list .task__item .item__button-cancel::after {
+.task .task__list .task__item .item__button-cancel::after {
   transform: rotate(45deg);
 }
-.task__list .task__item .item__button-cancel::before {
+.task .task__list .task__item .item__button-cancel::before {
   transform: rotate(-45deg);
 }
-.task__list .task__item._done {
+.task .task__list .task__item._done {
   background: #F4F4F4;
 }
-.task__list .task__item._done .item__button-done {
+.task .task__list .task__item._done .item__button-done {
   background: #C4C4C4;
 }
 
