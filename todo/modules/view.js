@@ -21,16 +21,8 @@ function addTask(value, block) {
   }
 }
 
-function getInputValue(e) {
-  e.preventDefault()
-  if (e.target.value) {
-    return e.target.value
-  }
-}
-
 export {
   inputField,
   taskList,
   addTask,
-  getInputValue
 };
