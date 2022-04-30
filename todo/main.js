@@ -1,39 +1,36 @@
-import {inputField, addTask, taskList} from './modules/view.js'
+import {addTask} from './modules/view.js'
+import {UI} from './modules/variables.js'
+
 
 // Add task
-inputField.forEach(currentInputField => currentInputField.onchange = function (e) {
+UI.INPUT_FIELD.forEach(currentInputField => currentInputField.onchange = function (e) {
   e.preventDefault()
-  try {
-    let inputValue = getInputValue(e)
+  let inputValue = e.target.value.trim()
+  if (!inputValue) return
 
-    if (inputValue) {
-      const currentBlock = currentInputField.closest('.task__block')
+  console.log(inputValue, currentInputField.id, e.target)
 
-      currentInputField.closest('.task__input').onclick = function (e) {
-        e.preventDefault()
-        const addTaskBtn = currentInputField.nextElementSibling
+  const currentBlock = currentInputField.closest('.task__block')
 
-        if (e.target === addTaskBtn) {
-          addTask(inputValue, currentBlock)
-          inputValue = ''
-        }
-      }
-      currentInputField.closest('.task__input').onkeyup = function (e) {
-        e.preventDefault()
-        addTask(inputValue, currentBlock)
-        inputValue = ''
-      }
+  currentInputField.closest('.task__input').onclick = function (e) {
+    e.preventDefault()
+    const addTaskBtn = currentInputField.nextElementSibling
+
+    if (e.target === addTaskBtn) {
+      addTask(inputValue, currentBlock)
+      inputValue = ''
     }
-  } catch (error) {
-    alert(error)
-  } finally {
-    e.target.value = ''
   }
-
+  // currentInputField.closest('.task__input').onkeyup = function (e) {
+  //   e.preventDefault()
+  //   addTask(inputValue, currentBlock)
+  //   inputValue = ''
+  // }
+  e.target.value = ''
 })
 
 // Task actions: done / remove
-taskList.forEach(currentTaskList =>
+UI.TASK_LIST.forEach(currentTaskList =>
   currentTaskList.addEventListener('click', function (e) {
 
     if (e.target.classList.contains('item__button-done')) {
@@ -48,8 +45,7 @@ taskList.forEach(currentTaskList =>
 
 // Get task from input
 function getInputValue(e) {
-  let inputValue = e.target.value.trim()
-  if (inputValue) {
-    return inputValue
+  if (e.target.value) {
+    return e.target.value.trim()
   }
 }
