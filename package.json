@@ -1,0 +1,28 @@
+{
+  "name": "todo_ui",
+  "version": "1.0.0",
+  "description": "small study projcet",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nardosha/TODO_UI.git"
+  },
+  "keywords": [
+    "todo"
+  ],
+  "author": "Natosha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nardosha/TODO_UI/issues"
+  },
+  "homepage": "https://github.com/Nardosha/TODO_UI#readme",
+  "dependencies": {
+    "date-fns": "^2.28.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.5.0"
+  }
+}

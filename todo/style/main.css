@@ -379,6 +379,9 @@ html {
   font-weight: inherit;
   text-transform: uppercase;
   margin: 0;
+  align-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .task .task__block {
@@ -462,9 +465,12 @@ html {
   justify-content: space-between;
   align-items: flex-start;
 }
+.task .task__list .task__item .task__item_container {
+  display: flex;
+  align-items: center;
+}
 .task .task__list .task__item .item__button-done {
   box-sizing: content-box;
-  order: -1;
   min-width: 21px;
   height: 21px;
   border: 1px solid #BBBBBB;
@@ -476,7 +482,6 @@ html {
 }
 .task .task__list .task__item .item__button-cancel {
   box-sizing: content-box;
-  order: 1;
   position: relative;
   cursor: pointer;
   width: 12px;
