@@ -1,6 +1,11 @@
-import {addTask} from './modules/view.js'
-import {UI} from './modules/variables.js'
+import {addTask, deleteTask} from './modules/view.js'
+import {STORE, UI} from './modules/variables.js'
+import {Storage} from './modules/Storage.js'
+import {getDate, getId, loadFromLocalStorage, loadFromSessionStorage} from "./modules/helpers.js";
 
+
+loadFromSessionStorage()
+loadFromLocalStorage()
 
 // Add task
 UI.INPUT_FIELD.forEach(currentInputField => currentInputField.onchange = function (e) {
@@ -8,24 +13,27 @@ UI.INPUT_FIELD.forEach(currentInputField => currentInputField.onchange = functio
   let inputValue = e.target.value.trim()
   if (!inputValue) return
 
-  console.log(inputValue, currentInputField.id, e.target)
 
   const currentBlock = currentInputField.closest('.task__block')
+  console.log(currentBlock)
 
   currentInputField.closest('.task__input').onclick = function (e) {
     e.preventDefault()
     const addTaskBtn = currentInputField.nextElementSibling
 
     if (e.target === addTaskBtn) {
-      addTask(inputValue, currentBlock)
-      inputValue = ''
+      const id = getId()
+      const date = getDate()
+      console.log(date)
+      const testTask = new Storage(id, inputValue, currentInputField.id, date, 'sessionStorage')
+      testTask.set()
+      STORE.set(id, testTask)
+
+      addTask(id, inputValue, currentInputField.id, date)
+      console.log(id)
+      console.log(STORE)
     }
   }
-  // currentInputField.closest('.task__input').onkeyup = function (e) {
-  //   e.preventDefault()
-  //   addTask(inputValue, currentBlock)
-  //   inputValue = ''
-  // }
   e.target.value = ''
 })
 
@@ -38,14 +46,9 @@ UI.TASK_LIST.forEach(currentTaskList =>
     }
 
     if (e.target.classList.contains('item__button-cancel')) {
-      e.target.closest('.task__item').remove()
+      let idElement = e.target.closest('.task__item').id
+      // e.target.closest('.task__item').remove()
+      deleteTask(idElement)
     }
   })
 )
-
-// Get task from input
-function getInputValue(e) {
-  if (e.target.value) {
-    return e.target.value.trim()
-  }
-}

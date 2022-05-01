@@ -1,8 +1,8 @@
-import { format } from "date-fns";
+import {UI, STORE} from "./variables";
 
-function addTask(value, block) {
+function addTask(key, value, priority, date) {
   if (value) {
-    console.log('добавляю')
+    const fieldPriority = priority === 'HIGH' ? UI.HIGH_LIST : UI.LOW_LIST
     const newTaskItem = document.createElement('div')
     const textContainer = document.createElement('div')
     const doneBtn = document.createElement('div')
@@ -15,23 +15,28 @@ function addTask(value, block) {
     cancelBtn.classList.add('item__button-cancel')
     taskText.classList.add('task__text')
 
-    const date = getDate()
+    newTaskItem.id = `${key}`
     taskText.textContent = `${date} ${value}`
 
     textContainer.append(doneBtn)
     textContainer.append(taskText)
     newTaskItem.append(textContainer)
     newTaskItem.append(cancelBtn)
-    block.querySelector('.task__list').append(newTaskItem)
+    fieldPriority.querySelector('.task__list').append(newTaskItem)
   }
 }
 
-function getDate() {
-  let date = format(new Date(), 'dd.MM')
-  console.log(date)
-  return date
+
+
+function deleteTask(id) {
+  const taskElem = document.getElementById(`${id}`)
+  const task = STORE.get(id)
+  taskElem.remove()
+  task.clear()
+  STORE.delete(id)
 }
 
 export {
   addTask,
+  deleteTask
 };
