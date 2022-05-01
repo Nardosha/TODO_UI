@@ -7,12 +7,10 @@ import {getDate, getId, loadFromLocalStorage, loadFromSessionStorage} from "./mo
 loadFromSessionStorage()
 loadFromLocalStorage()
 
-// Add task
 UI.INPUT_FIELD.forEach(currentInputField => currentInputField.onchange = function (e) {
   e.preventDefault()
   let inputValue = e.target.value.trim()
   if (!inputValue) return
-
 
   const currentBlock = currentInputField.closest('.task__block')
   console.log(currentBlock)
@@ -24,10 +22,11 @@ UI.INPUT_FIELD.forEach(currentInputField => currentInputField.onchange = functio
     if (e.target === addTaskBtn) {
       const id = getId()
       const date = getDate()
-      console.log(date)
-      const testTask = new Storage(id, inputValue, currentInputField.id, date, 'sessionStorage')
+      const testTask = new Storage(id, inputValue, currentInputField.id, date, 'localStorage')
       testTask.set()
       STORE.set(id, testTask)
+
+      console.log(testTask.isEmpty())
 
       addTask(id, inputValue, currentInputField.id, date)
       console.log(id)
@@ -47,8 +46,10 @@ UI.TASK_LIST.forEach(currentTaskList =>
 
     if (e.target.classList.contains('item__button-cancel')) {
       let idElement = e.target.closest('.task__item').id
-      // e.target.closest('.task__item').remove()
       deleteTask(idElement)
     }
   })
 )
+
+// TODO Слушаталей отформатировать
+// TODO Сохранять статус задачи в класс Storage
